@@ -18,6 +18,10 @@
 **
 **  Program je testiran u Linux OS.
 '''
+import os
+'''
+Dimenzije matrice 3x3
+'''
 w, h = 3, 3
 MATRICA = [[-1 for x in range(w)] for y in range(h)]
 
@@ -35,13 +39,18 @@ def print_matrix():
                 print('' + MATRICA[i][j],end='')
         print()
 def unos(param):
-    l = input('Unesite poziciju na koju zelite da stavite '+ param +': ').split()
-    i, j = [int(x)-1 for x in l]
-    while MATRICA[i][j] != -1:
-        print('Dato polje nije prazno.')
+    try:
+        l = input('Unesite poziciju na koju zelite da stavite '+ param +': ').split()
+        i, j = [int(x)-1 for x in l]
+        while MATRICA[i][j] != -1:
+            print('Dato polje nije prazno.')
+            print_matrix()
+            l = input('Unesite poziciju na koju zelite da stavite '+ param + ':').split()
+            i, j = [int(x)-1 for x in l]
+    except KeyboardInterrupt:
+        os.system('clear')
         print_matrix()
-        l = input('Unesite poziciju na koju zelite da stavite '+ param + ':').split()
-        i, j = [int(x) for x in l]
+        unos(param)
     return i, j
 
 def fill():
